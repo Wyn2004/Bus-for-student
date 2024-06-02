@@ -1,0 +1,88 @@
+﻿Bảng;TaiKhoan;Phụ thuộc hàm
+Thuộc tính;MaTaiKhoan;"MaTaiKhoan -> DiemTichLuy, LoaiTaiKhoan, SoTien,
+TenDangNhap, MatKhau"
+;DiemTichLuy;
+;SoTien;
+;TenDangNhap;TenDangNhap -> LoaiTaiKhoan,SoTien
+;MatKhau;
+;VaiTro;
+;;
+;;
+Bảng;HocSinh;Phụ thuộc hàm
+Thuộc tính;idHocSinh;idHocSinh -> ALL
+;TenHocSinh;
+;GioiTinh;
+;DiaChi;
+;NgaySinh;
+;TheSinhVien;"TheSinhVien -> TenHocSinh, GioiTinh, 
+DiaChi, NgaySinh"
+;SoDienThoai;"SoDienThoai -> TenHocSinh, GioiTinh, 
+DiaChi, NgaySinh, TheSinhVien"
+;TenNguoiThan;
+;SoDienThoaiNguoiThan;SoDienThoaiNguoiThan -> TenNguoiThan
+;;
+;;
+Bảng;Ve;Phụ thuộc hàm
+Thuộc tính;idVe;idVe -> ALL
+;GiaVe;
+;NgayDi;
+;NgayDatVe;
+;;
+;;
+Bảng;PhuongThucThanhToan;Phụ thuộc hàm
+Thuộc tính;idPhuongThuc;idPhuongThuc -> TenPhuongThuc
+;TenPhuongThuc;
+;;
+;;
+Bảng;KhuyenMai;Phụ thuộc hàm
+Thuộc tính;idKhuyenMai;idKhuyenMai -> ALL
+;TenKhuyenMai;
+;NgayBatDau;
+;NgayKetThuc;
+;TyLeGiamGia;
+;;
+;;
+Bảng;NhanVien;Phụ thuộc hàm
+Thuộc tính;idNhanVien;idNhanVien -> ALL
+;TenNhanVien;
+;GioiTinh;
+;DiaChi;
+;CCCD;"CCCD -> TenNhanVien, GioiTinh, 
+DiaChi, NgaySinh, BangCap"
+;NgaySinh;
+;SoDienThoai;"SoDienThoai -> TenNhanVien, GioiTinh, 
+DiaChi, NgaySinh, CCCD"
+;Luong;
+;BangCap;
+;;
+;;
+Bảng;ViTriNhanVien;Phụ thuộc hàm
+Thuộc tính;idLoaiNhanVien;idLoaiNhanVien -> TenLoaiNhanVien
+;TenLoaiNhanVien;
+;;
+;;
+;;
+Bảng;Xe;Phụ thuộc hàm
+Thuộc tính;idXe;idXe -> ALL
+;LoaiXe;
+;BienSoXe;
+;SoLuongGhe;
+;;
+;;
+Bảng;Tuyen;Phụ thuộc hàm
+Thuộc tính;idTuyen;idChuyenDi -> ALL
+;GioXuatPhat;
+;GioDen;
+;Ngay;
+;BenDi;
+;BenDen;
+;NguoiPhuTrach;
+;;
+;;
+Bảng;ChuyenDi;Phụ thuộc hàm
+Thuộc tính;idChuyenDi;idTuyenDuong -> ALL
+;TramXuatPhat;
+;TramDen;
+;GioXuatPhat;
+;GioDen;
+;;

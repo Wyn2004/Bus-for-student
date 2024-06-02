@@ -1,0 +1,190 @@
+USE bus
+-- Create a new table called '[HocSinh]' in schema '[dbo]'
+-- Drop the table if it already exists
+IF OBJECT_ID('[dbo].[HocSinh]', 'U') IS NOT NULL
+DROP TABLE [dbo].[HocSinh]
+GO
+-- Create the table in the specified schema
+CREATE TABLE [dbo].[HocSinh]
+(
+    [idHocSinh] VARCHAR(50) NOT NULL PRIMARY KEY, -- Primary Key column
+    [TenHocSinh] NVARCHAR(50) NOT NULL,
+    [GioiTinh] NVARCHAR(50) NOT NULL,
+    [DiaChi] NVARCHAR(50) NOT NULL,
+    [NgaySinh] DATE NOT NULL,
+    [TheSinhVien] VARCHAR(50) NOT NULL,
+    [SoDienThoai] VARCHAR(50) NOT NULL,
+    [TenNguoiThan] NVARCHAR(50) NOT NULL,
+    [SoDienThoaiNguoiThan] VARCHAR(50) NOT NULL
+    -- Specify more columns here
+);
+GO
+
+-- Create a new table called '[TaiKhoan]' in schema '[dbo]'
+-- Drop the table if it already exists
+IF OBJECT_ID('[dbo].[TaiKhoan]', 'U') IS NOT NULL
+DROP TABLE [dbo].[TaiKhoan]
+GO
+-- Create the table in the specified schema
+CREATE TABLE [dbo].[TaiKhoan]
+(
+    [MaTaiKhoan] VARCHAR(50) NOT NULL PRIMARY KEY, -- Primary Key column
+    [SoTien] INT NOT NULL,
+    [TenDangNhap] VARCHAR(50) NOT NULL,
+    [MatKhau] VARCHAR(50) NOT NULL,
+    [idHocSinh] VARCHAR(50) NOT NULL
+    FOREIGN KEY (idHocSinh) REFERENCES HocSinh(idHocSinh)
+    -- Specify more columns here
+);
+GO
+
+-- Create a new table called '[LoaiNhanVien]' in schema '[dbo]'
+-- Drop the table if it already exists
+IF OBJECT_ID('[dbo].[LoaiNhanVien]', 'U') IS NOT NULL
+DROP TABLE [dbo].[LoaiNhanVien]
+GO
+-- Create the table in the specified schema
+CREATE TABLE [dbo].[LoaiNhanVien]
+(
+    [idLoaiNhanVien] VARCHAR(50) NOT NULL PRIMARY KEY, -- Primary Key column
+    [TenLoaiNhanVien] NVARCHAR(50) NOT NULL,
+    -- Specify more columns here
+);
+GO
+
+-- Create a new table called '[NhanVien]' in schema '[dbo]'
+-- Drop the table if it already exists
+IF OBJECT_ID('[dbo].[NhanVien]', 'U') IS NOT NULL
+DROP TABLE [dbo].[NhanVien]
+GO
+-- Create the table in the specified schema
+CREATE TABLE [dbo].[NhanVien]
+(
+    [idNhanVien] VARCHAR(50) NOT NULL PRIMARY KEY, -- Primary Key column
+    [TenNhanVien] NVARCHAR(50) NOT NULL,
+    [GioiTinh] NVARCHAR(50) NOT NULL,
+    [DiaChi] NVARCHAR(50) NOT NULL,
+    [CCCD] VARCHAR(50) NOT NULL,
+    [NgaySinh] DATE NOT NULL,
+    [SoDienThoai] VARCHAR(50) NOT NULL,
+    [idLoaiNhanVien] VARCHAR(50) NOT NULL
+    FOREIGN KEY (idLoaiNhanVien) REFERENCES LoaiNhanVien(idLoaiNhanVien),
+    [Luong] INT NOT NULL,
+    [BangCap] NVARCHAR(50) NOT NULL
+    -- Specify more columns here
+);
+GO
+
+-- Create a new table called '[PhuongThucThanhToan]' in schema '[dbo]'
+-- Drop the table if it already exists
+IF OBJECT_ID('[dbo].[PhuongThucThanhToan]', 'U') IS NOT NULL
+DROP TABLE [dbo].[PhuongThucThanhToan]
+GO
+-- Create the table in the specified schema
+CREATE TABLE [dbo].[PhuongThucThanhToan]
+(
+    [idPhuongThuc] VARCHAR(50) NOT NULL PRIMARY KEY, -- Primary Key column
+    [TenPhuongThuc] NVARCHAR(50) NOT NULL
+    -- Specify more columns here
+);
+GO
+
+-- Create a new table called '[KhuyenMai]' in schema '[dbo]'
+-- Drop the table if it already exists
+IF OBJECT_ID('[dbo].[KhuyenMai]', 'U') IS NOT NULL
+DROP TABLE [dbo].[KhuyenMai]
+GO
+-- Create the table in the specified schema
+CREATE TABLE [dbo].[KhuyenMai]
+(
+    [idKhuyenMai] VARCHAR(50) NOT NULL PRIMARY KEY, -- Primary Key column
+    [TenKhuyenMai] NVARCHAR(50) NOT NULL,
+    [NgayBatDau] DATE NOT NULL,
+    [NgayKetThuc] DATE NOT NULL,
+    [TyLeGiamGia] INT NOT NULL
+    -- Specify more columns here
+);
+GO
+
+-- Create a new table called '[Tuyen]' in schema '[dbo]'
+-- Drop the table if it already exists
+IF OBJECT_ID('[dbo].[Tuyen]', 'U') IS NOT NULL
+DROP TABLE [dbo].[Tuyen]
+GO
+-- Create the table in the specified schema
+CREATE TABLE [dbo].[Tuyen]
+(
+    [idTuyen] VARCHAR(50) NOT NULL PRIMARY KEY, -- Primary Key column
+    [GioXuatPhat] TIME NOT NULL,
+    [GioDen] TIME NOT NULL,
+    [BenDi] NVARCHAR(50) NOT NULL,
+    [BenDen] NVARCHAR(50) NOT NULL,
+    [NguoiPhuTrach] VARCHAR(50) NOT NULL
+    FOREIGN KEY (NguoiPhuTrach) REFERENCES NhanVien(idNhanVien),
+    [Ngay] DATE NOT NULL
+    -- Specify more columns here
+);
+GO
+
+-- Create a new table called '[ChuyenDi]' in schema '[dbo]'
+-- Drop the table if it already exists
+IF OBJECT_ID('[dbo].[ChuyenDi]', 'U') IS NOT NULL
+DROP TABLE [dbo].[ChuyenDi]
+GO
+-- Create the table in the specified schema
+CREATE TABLE [dbo].[ChuyenDi]
+(
+    [idChuyenDi] VARCHAR(50) NOT NULL PRIMARY KEY, -- Primary Key column
+    [idTuyen] VARCHAR(50) NOT NULL
+    FOREIGN KEY (idTuyen) REFERENCES Tuyen(idTuyen),
+    [TramXuatPhat] VARCHAR(50) NOT NULL,
+    [TramDen] VARCHAR(50) NOT NULL
+    -- Specify more columns here
+);
+GO
+
+-- Create a new table called '[Xe]' in schema '[dbo]'
+-- Drop the table if it already exists
+IF OBJECT_ID('[dbo].[Xe]', 'U') IS NOT NULL
+DROP TABLE [dbo].[Xe]
+GO
+-- Create the table in the specified schema
+CREATE TABLE [dbo].[Xe]
+(
+    [idXe] VARCHAR(50) NOT NULL PRIMARY KEY, -- Primary Key column
+    [LoaiXe] NVARCHAR(50) NOT NULL,
+    [BienSoXe] VARCHAR(50) NOT NULL,
+    [SoLuongGhe] INT NOT NULL,
+    [idChuyenDi] VARCHAR(50) NOT NULL
+    FOREIGN KEY (idChuyenDi) REFERENCES ChuyenDi(idChuyenDi)
+    -- Specify more columns here
+);
+GO
+
+-- Create a new table called '[Ve]' in schema '[dbo]'
+-- Drop the table if it already exists
+IF OBJECT_ID('[dbo].[Ve]', 'U') IS NOT NULL
+DROP TABLE [dbo].[Ve]
+GO
+-- Create the table in the specified schema
+CREATE TABLE [dbo].[Ve]
+(
+    [idVe] VARCHAR(50) NOT NULL PRIMARY KEY, -- Primary Key column
+    [idHocSinh] VARCHAR(50) NOT NULL
+    FOREIGN KEY (idHocSinh) REFERENCES HocSinh(idHocSinh),
+    [NgayDatVe] DATE NOT NULL,
+    [NgayDi] DATE NOT NULL,
+    [GiaVe] INT NOT NULL,
+    [NhanVienDatVe] VARCHAR(50) NOT NULL
+    FOREIGN KEY (NhanVienDatVe) REFERENCES NhanVien(idNhanVien),
+    [MaXe] VARCHAR(50) NOT NULL
+    FOREIGN KEY (MaXe) REFERENCES Xe(idXe),
+    [idChuyenDi] VARCHAR(50) NOT NULL
+    FOREIGN KEY (idChuyenDi) REFERENCES ChuyenDi(idChuyenDi),
+    [idKhuyenMai] VARCHAR(50) NOT NULL
+    FOREIGN KEY (idKhuyenMai) REFERENCES KhuyenMai(idKhuyenMai),
+    [idPhuongThuc] VARCHAR(50) NOT NULL
+    FOREIGN KEY (idPhuongThuc) REFERENCES PhuongThucThanhToan(idPhuongThuc)
+    -- Specify more columns here
+);
+GO
